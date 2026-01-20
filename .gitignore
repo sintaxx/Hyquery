@@ -1,8 +1,5 @@
-# Xcode
+.DS_Store
+**/xcuserdata/
 DerivedData/
 build/
 *.xcuserstate
-.DS_Store
-
-# User-specific Xcode data
-**/xcuserdata/
