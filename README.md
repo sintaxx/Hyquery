@@ -1,62 +1,51 @@
-# <App Name>
+# Hyquery — Hytale LAN Monitor (macOS)
 
-A modern, high-quality Apple platform app built with Swift and Xcode. This README provides everything you need to understand the project, set it up locally, and contribute effectively.
+A lightweight macOS SwiftUI app for monitoring a Hytale server on your local network. Hyquery polls the Nitrado WebServer Query endpoint and presents server, universe, player, and plugin information in a clean dashboard with logs and raw JSON inspection.
 
 <p align="center">
-  <img src="docs/hero.png" alt="App hero" width="720" />
+  <img src="docs/hero.png" alt="Hyquery hero" width="720" />
 </p>
 
 <p align="center">
-  <a href="#requirements"><img src="https://img.shields.io/badge/platforms-iOS%20%7C%20iPadOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20visionOS-blue" alt="Platforms" /></a>
-  <a href="#requirements"><img src="https://img.shields.io/badge/Swift-5.10%2B-orange" alt="Swift" /></a>
-  <a href="#getting-started"><img src="https://img.shields.io/badge/Xcode-15%2B-informational" alt="Xcode" /></a>
-  <a href="#license"><img src="https://img.shields.io/badge/license-MIT-green" alt="License" /></a>
+  <img src="https://img.shields.io/badge/platform-macOS%2014%2B-blue" alt="Platform" />
+  <img src="https://img.shields.io/badge/Swift-5.10%2B-orange" alt="Swift" />
+  <img src="https://img.shields.io/badge/Xcode-15%2B-informational" alt="Xcode" />
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
 </p>
 
 ---
 
 ## Overview
 
-Briefly describe what your app does, who it’s for, and why it’s useful.
+Hyquery targets a Hytale server running on your LAN (for example, in Docker on host `NUCTAX` / `192.168.0.203`). It queries the WebServer plugin’s Query endpoint at `/Nitrado/Query` over HTTPS and:
 
-- Clear, focused value proposition
-- Key workflows and outcomes
-- Links to product pages, TestFlight, or App Store (if applicable)
+- Shows high-level status: endpoint, polling state, and key server/universe stats
+- Lists players and plugins when permissions allow
+- Displays the raw JSON response with syntax highlighting
+- Captures request/response logs for troubleshooting
+
+This is ideal for local monitoring and debugging of your Hytale server without signing into the web console.
 
 ## Features
 
-- Fast, responsive UI with SwiftUI
-- Modern concurrency with async/await
-- Safe persistence using Swift Data / Core Data (customize as needed)
-- Accessibility best practices (Dynamic Type, VoiceOver)
-- Localized strings and assets
-- Thorough testing with Swift Testing / XCTest
-
-## Screenshots
-
-Include a few representative screenshots or screen recordings.
-
-<p align="center">
-  <img src="docs/screenshot-1.png" alt="Screenshot 1" width="280" />
-  <img src="docs/screenshot-2.png" alt="Screenshot 2" width="280" />
-  <img src="docs/screenshot-3.png" alt="Screenshot 3" width="280" />
-</p>
+- SwiftUI macOS interface with a multi-tab layout: Dashboard, Players, Plugins, Raw JSON, Logs, and Notes
+- One-shot requests and optional polling loop with configurable interval (1s–60s) that avoids overlapping requests
+- Robust JSON parsing for flexible response shapes (arrays, wrapped arrays, dictionaries)
+- Automatic handling of ISO-8859-1 responses by converting to UTF-8 for decoding
+- URLSession-based client with required `Accept: application/json` header to avoid HTTP 406 responses
+- Self-signed TLS support for known LAN hosts via `URLSessionDelegate`
+- Copy-to-clipboard for raw JSON and project notes
 
 ## Architecture
 
-Describe the app’s structure and guiding principles.
-
-- SwiftUI-first UI with unidirectional data flow
-- View models using `Observable` / `@State` / `@Environment` (customize)
-- Networking with `URLSession` and `Codable`
-- Dependency injection via protocol-oriented design
-- Modular organization: Features, Shared, Services
+- SwiftUI-first with an `AppViewModel` (`@MainActor`, `ObservableObject`) providing state and actions
+- Networking via `HytaleQueryClient` using `URLSession` (ephemeral configuration)
+- Strongly-typed models (`QueryResponse`, `ServerInfo`, `UniverseInfo`, `PlayersInfo`, `PluginsInfo`) using `Codable`
+- Defensive decoding for optional sections gated by server permissions
+- Small, composable SwiftUI views for status cards, lists, and syntax-highlighted JSON
 
 ```text
-App/
-├─ Sources/
-│  ├─ Features/
-│  ├─ Shared/
-│  └─ Services/
-├─ Tests/
-└─ Resources/
+Hyquery/
+├─ ContentView.swift           # UI, tabs, and project notes
+├─ HyqueryApp.swift            # App entry point
+└─ (additional files as needed)
