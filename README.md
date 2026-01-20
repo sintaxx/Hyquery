@@ -3,7 +3,7 @@
 A lightweight macOS SwiftUI app for monitoring a Hytale server on your local network. Hyquery polls the Nitrado WebServer Query endpoint and presents server, universe, player, and plugin information in a clean dashboard with logs and raw JSON inspection.
 
 <p align="center">
-  <a href="docs/main.png"><img src="docs/main.png" alt="Hyquery main screenshot" width="820" /></a>
+  <a href="Hyquery/docs/main.png"><img src="Hyquery/docs/main.png" alt="Hyquery main screenshot" width="820" /></a>
 </p>
 
 <p align="center">
@@ -41,10 +41,10 @@ This is ideal for local monitoring and debugging of your Hytale server without s
 Below are compact thumbnails; click any image to view the full-size screenshot.
 
 <p align="center">
-  <a href="docs/main.png"><img src="docs/main.png" alt="Main" width="240" /></a>
-  <a href="docs/json.png"><img src="docs/json.png" alt="Raw JSON" width="240" /></a>
-  <a href="docs/logs.png"><img src="docs/logs.png" alt="Logs" width="240" /></a>
-  <a href="docs/plugins.png"><img src="docs/plugins.png" alt="Plugins" width="240" /></a>
+  <a href="Hyquery/docs/main.png"><img src="Hyquery/docs/main.png" alt="Main" width="240" /></a>
+  <a href="Hyquery/docs/json.png"><img src="Hyquery/docs/json.png" alt="Raw JSON" width="240" /></a>
+  <a href="Hyquery/docs/logs.png"><img src="Hyquery/docs/logs.png" alt="Logs" width="240" /></a>
+  <a href="Hyquery/docs/plugins.png"><img src="Hyquery/docs/plugins.png" alt="Plugins" width="240" /></a>
 </p>
 
 ## Architecture
@@ -60,5 +60,6 @@ Hyquery/
 ├─ ContentView.swift           # UI, tabs, and project notes
 ├─ HyqueryApp.swift            # App entry point
 └─ (additional files as needed)
+
 
 
