@@ -1,5 +1,7 @@
 # Hyquery — Hytale LAN Monitor (macOS)
 
+This is an unofficial fan project and is not affiliated with Hytale or Hypixel Studios.
+
 A lightweight macOS SwiftUI app for monitoring a Hytale server on your local network. Hyquery polls the Nitrado WebServer Query endpoint and presents server, universe, player, and plugin information in a clean dashboard with logs and raw JSON inspection.
 
 <p align="center">
